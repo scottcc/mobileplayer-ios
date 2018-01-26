@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit', 'MediaPlayer'
   s.source_files = 'MobilePlayer/**/*.swift'
   s.resource_bundle  = { 'MobilePlayer' => 'MobilePlayer/**/*.png' }
+  s.xcconfig = { 'SWIFT_VERSION' => '3.2' }
 end
