@@ -9,7 +9,7 @@
 import Foundation
 
 /// Holds player configuration values.
-public class MobilePlayerConfig {
+public class MobilePlayerConfig: NSObject {
 
   /// Watermark configuration.
   public let watermarkConfig: WatermarkConfig?
@@ -21,7 +21,7 @@ public class MobilePlayerConfig {
   public let bottomBarConfig: BarConfig
 
   /// Initializes with default values.
-  public convenience init() {
+  public convenience override init() {
     self.init(dictionary: [String: Any]())
   }
 
