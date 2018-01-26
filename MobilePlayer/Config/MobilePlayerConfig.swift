@@ -29,7 +29,7 @@ public class MobilePlayerConfig {
   ///
   /// - parameters:
   ///   - fileURL: URL indicating the location of the configuration file.
-  public convenience init(fileURL: URL) {
+  @objc public convenience init(fileURL: URL) {
     if
       let jsonString = (try? String(contentsOf: fileURL, encoding: String.Encoding.utf8)),
       let jsonData = jsonString.data(using: String.Encoding.utf8),
@@ -48,7 +48,7 @@ public class MobilePlayerConfig {
   ///
   /// - parameters:
   ///   - dictionary: Configuration dictionary.
-  public init(dictionary: [String: Any]) {
+  @objc public init(dictionary: [String: Any]) {
     // Values need to be AnyObject for type conversions to work correctly.
     let dictionary = dictionary as [String: AnyObject]
 
