@@ -175,7 +175,14 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
         if let navigationController = slf.navigationController {
           navigationController.popViewController(animated: true)
         } else if let presentingController = slf.presentingViewController {
-          presentingController.dismissMoviePlayerViewControllerAnimated()
+          // SCC: 2018-03-21: Using the deprecated way of dismissing this, in combination
+          //                  with the new presentViewConroller:animated:callback to
+          //                  *present* it causes the animation to go up again as it leaves.
+          //                  Seeing as this is a fork that NO ONE ELSE will likely use,
+          //                  I'm just arbitrarily changing it. So there.
+          //
+          // presentingController.dismissMoviePlayerViewControllerAnimated()
+          presentingController.dismiss(animated: true, completion: nil)
         }
       },
       forControlEvents: .touchUpInside)
