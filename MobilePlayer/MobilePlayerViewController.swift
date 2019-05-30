@@ -86,7 +86,7 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
   ///   - prerollViewController: Pre-roll view controller. Defaults to `nil`.
   ///   - pauseOverlayViewController: Pause overlay view controller. Defaults to `nil`.
   ///   - postrollViewController: Post-roll view controller. Defaults to `nil`.
-  public init(contentURL: URL,
+  @objc public init(contentURL: URL,
               config: MobilePlayerConfig = MobilePlayerViewController.globalConfig,
               prerollViewController: MobilePlayerOverlayViewController? = nil,
               pauseOverlayViewController: MobilePlayerOverlayViewController? = nil,
@@ -464,11 +464,11 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
         overlay: overlayViewController))
     } else if overlayViewController.parent == nil {
       overlayViewController.delegate = self
-      addChildViewController(overlayViewController)
+      addChild(overlayViewController)
       overlayViewController.view.clipsToBounds = true
       overlayViewController.view.frame = controlsView.overlayContainerView.bounds
       controlsView.overlayContainerView.addSubview(overlayViewController.view)
-      overlayViewController.didMove(toParentViewController: self)
+      overlayViewController.didMove(toParent: self)
     }
   }
 
@@ -478,7 +478,7 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
       timedOverlayInfo.overlay.dismiss()
     }
     timedOverlays.removeAll()
-    for childViewController in childViewControllers {
+    for childViewController in children {
       if childViewController is WatermarkViewController { continue }
       (childViewController as? MobilePlayerOverlayViewController)?.dismiss()
     }
@@ -619,9 +619,9 @@ open class MobilePlayerViewController: MPMoviePlayerViewController {
 extension MobilePlayerViewController: MobilePlayerOverlayViewControllerDelegate {
 
   func dismiss(mobilePlayerOverlayViewController overlayViewController: MobilePlayerOverlayViewController) {
-    overlayViewController.willMove(toParentViewController: nil)
+    overlayViewController.willMove(toParent: nil)
     overlayViewController.view.removeFromSuperview()
-    overlayViewController.removeFromParentViewController()
+    overlayViewController.removeFromParent()
     if overlayViewController == prerollViewController {
       play()
     }
